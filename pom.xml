@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.open</groupId>
+  <artifactId>open-parent</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>open-parent</name>
+  <description>open</description>
+
+  <modules>
+    <module>open-common</module>
+	<module>gateway-service</module>
+	<module>user-service</module>
+    <module>auth-service</module>
+	<module>pay-service</module>
+  </modules>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.0.2.RELEASE</version>
+  </parent>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>Finchley.RELEASE</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+    <mysql.connector.java.version>5.1.46</mysql.connector.java.version>
+    <mybatis.version>3.4.6</mybatis.version>
+    <mybatis.spring.version>1.3.2</mybatis.spring.version>
+    <mybatis.mapper.version>2.0.3-beta1</mybatis.mapper.version>
+    <mybatis.generator.version>1.3.2</mybatis.generator.version>
+    <springboot.pagehelper.version>1.2.5</springboot.pagehelper.version>
+    <kafka.clients>1.1.0</kafka.clients>
+
+    <fastjson.version>1.2.7</fastjson.version>
+    <!--<logback-classic.version>1.1.7</logback-classic.version>-->
+    <disruptor.version>3.3.6</disruptor.version>
+    <slf4j-api.version>1.7.7</slf4j-api.version>
+    <commons-lang3.version>3.5</commons-lang3.version>
+    <commons.beanutils.version>1.7.0</commons.beanutils.version>
+    <commons.collections.version>3.2.2</commons.collections.version>
+  </properties>
+
+  <build>
+    <!-- <defaultGoal>compile</defaultGoal> -->
+    <plugins>
+      <!-- 资源文件拷贝插件 -->
+      <!--<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.7</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      &lt;!&ndash; java编译插件 &ndash;&gt;
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>-->
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+  <repositories>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/libs-milestone</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+</project>
