@@ -6,13 +6,16 @@ import org.isomorphism.util.TokenBucket;
 import org.isomorphism.util.TokenBuckets;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.core.Ordered;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.concurrent.TimeUnit;
 
-public class ThrottleGatewayFilter implements GatewayFilter {
+@Component
+public class ThrottleGatewayFilter implements GatewayFilter, Ordered {
     private static final Log logger = LogFactory.getLog(ThrottleGatewayFilter.class);
 
     int capacity;
@@ -72,5 +75,10 @@ public class ThrottleGatewayFilter implements GatewayFilter {
         }
         exchange.getResponse().setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
         return exchange.getResponse().setComplete();
+    }
+
+    @Override
+    public int getOrder() {
+        return Ordered.LOWEST_PRECEDENCE;
     }
 }
