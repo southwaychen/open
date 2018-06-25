@@ -9,10 +9,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 @RequestMapping(value =AuthUrl.SERVICE_PREFIX)
 public class AuthController {
 
@@ -28,8 +29,8 @@ public class AuthController {
      * @return ModelAndView
      */
     @GetMapping("/require")
-    public ModelAndView require() {
-        return new ModelAndView("ftl/login");
+    public String require() {
+        return "login";
     }
 
     /**
