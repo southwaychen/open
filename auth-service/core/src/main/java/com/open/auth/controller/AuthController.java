@@ -1,9 +1,9 @@
 package com.open.auth.controller;
 
 import com.crt.open.api.AuthUrl;
-import com.open.auth.service.client.UserClient;
 import com.open.common.constant.SecurityConstants;
-import com.open.common.controller.ResponseWrapper;
+import com.open.api.entity.vo.ResponseWrapper;
+import com.open.user.api.client.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheEvict;
@@ -58,6 +58,7 @@ public class AuthController {
     }
 
     @RequestMapping(value = AuthUrl.FIND_USER_BY_USERNAME)
+    @ResponseBody
     public ResponseWrapper findUserByUsername(@PathVariable("username") String username){
         ResponseWrapper responseWrapper = userServiceClient.findUserByUsername(username);
         return responseWrapper;

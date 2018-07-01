@@ -19,8 +19,8 @@ package com.open.auth.dal.model;
 
 import com.open.common.constant.CommonConstant;
 import com.open.common.constant.SecurityConstants;
-import com.open.user.api.vo.UserVO;
-import com.open.user.api.vo.SysRole;
+import com.open.user.api.entity.vo.UserVO;
+import com.open.user.api.entity.vo.SysRole;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,13 +36,14 @@ import java.util.List;
  */
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
-
+    private String userId;
     private String username;
     private String password;
     private String status;
-    private List<SysRole> roleList = new ArrayList<>();
+    private List<SysRole> roleList = new ArrayList<SysRole>();
 
     public UserDetailsImpl(UserVO userVo) {
+        this.userId = userVo.getUserId();
         this.username = userVo.getUsername();
         this.password = userVo.getPassword();
         this.status = userVo.getDelFlag();
@@ -111,5 +112,13 @@ public class UserDetailsImpl implements UserDetails {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

@@ -15,16 +15,9 @@ import org.springframework.web.client.RestTemplate;
  */
 @SpringBootApplication
 @ComponentScan(basePackages={"com.open"})
-@MapperScan(basePackages={"com.open.auth.dal.mapper"})
 @EnableDiscoveryClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = {"com.open"})
 public class AuthServiceAppliaction {
-
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-	   // Do any additional configuration here
-	   return builder.build();
-	}
 	
     public static void main(String[] args) {
         SpringApplication.run(AuthServiceAppliaction.class, args);

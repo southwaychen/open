@@ -27,35 +27,15 @@ import java.util.concurrent.TimeUnit;
 //@Import(AdditionalRoutes.class)
 public class GatewayServiceAppliaction {
 
-	@Value("${test.uri:http://127.0.0.1:2222/user/select}")
-	String uri;
 
-
-	@Bean
-	public RouterFunction<ServerResponse> testFunRouterFunction() {
-		RouterFunction<ServerResponse> route = RouterFunctions.route(
-				RequestPredicates.path("/testfun"),
-				request -> ServerResponse.ok().body(BodyInserters.fromObject("hello")));
-		return route;
-	}
-
-	static class Hello {
-		String message;
-
-		public Hello() { }
-
-		public Hello(String message) {
-			this.message = message;
-		}
-
-		public String getMessage() {
-			return message;
-		}
-
-		public void setMessage(String message) {
-			this.message = message;
-		}
-	}
+    @Bean
+    public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
+        return builder.routes()
+                //basic proxy
+                .route(r -> r.path("/baidu")
+                        .uri("http://127.0.0.1:3333/auth/require").order(1)
+                ).build();
+    }
 	
     public static void main(String[] args) {
         SpringApplication.run(GatewayServiceAppliaction.class, args);

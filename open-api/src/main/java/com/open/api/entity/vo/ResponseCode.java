@@ -1,4 +1,4 @@
-package com.open.common.controller;
+package com.open.api.entity.vo;
 
 /**
  * RPC调用返回码枚举类

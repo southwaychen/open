@@ -1,6 +1,6 @@
 package com.open.user.service.biz;
 
-import com.open.common.controller.ResponseCode;
+import com.open.api.entity.vo.ResponseCode;
 import com.open.common.exception.ServiceException;
 import com.open.common.util.UuidUtils;
 import com.open.user.dal.mapper.UserInfoMapper;

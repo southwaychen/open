@@ -46,13 +46,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry =
-                http.formLogin().loginPage("/authentication/require")
-                        .loginProcessingUrl("/authentication/form")
-                        .and()
-                        .authorizeRequests();
-        filterIgnorePropertiesConfig.getUrls().forEach(url -> registry.antMatchers(url).permitAll());
-        registry.anyRequest().authenticated()
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "/css/**", "/js/**").permitAll()
+                .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                .antMatchers("/user/**").hasAnyRole("USER")
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
                 .and()
                 .csrf().disable();
        // http.apply(mobileSecurityConfigurer);
@@ -65,6 +68,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/**","/css/**","/js/**","/lib/**","/img/**","/skin/**");
+        web.ignoring().antMatchers("/**","/css/**","/js/**","/lib/**","/img/**","/skin/**","/favor.ioc");
     }
 }

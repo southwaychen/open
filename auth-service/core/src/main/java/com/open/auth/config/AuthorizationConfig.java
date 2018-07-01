@@ -17,6 +17,7 @@
 
 package com.open.auth.config;
 
+import com.open.auth.dal.model.UserDetailsImpl;
 import com.open.common.constant.CommonConstant;
 import com.open.common.constant.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,6 +141,10 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
         return (accessToken, authentication) -> {
             final Map<String, Object> additionalInfo = new HashMap<>(1);
             additionalInfo.put("license", SecurityConstants.PIG_LICENSE);
+            UserDetailsImpl user = (UserDetailsImpl) authentication.getUserAuthentication().getPrincipal();
+            if (user != null) {
+                additionalInfo.put("userId", user.getUserId());
+            }
             ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
             return accessToken;
         };

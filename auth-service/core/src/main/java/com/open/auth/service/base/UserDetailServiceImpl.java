@@ -18,8 +18,8 @@
 package com.open.auth.service.base;
 
 import com.open.auth.dal.model.UserDetailsImpl;
-import com.open.auth.service.client.UserClient;
-import com.open.user.api.vo.UserVO;
+import com.open.user.api.client.UserClient;
+import com.open.user.api.entity.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

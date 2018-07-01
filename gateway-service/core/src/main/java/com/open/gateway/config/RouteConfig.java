@@ -5,6 +5,8 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.gateway.discovery.DiscoveryClientRouteDefinitionLocator;
 import org.springframework.cloud.gateway.discovery.DiscoveryLocatorProperties;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
+import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -28,6 +30,8 @@ public class RouteConfig {
 
     private static final String ALL = "*";
     private static final String MAX_AGE = "18000L";
+
+
 
     @Bean
     public WebFilter corsFilter() {

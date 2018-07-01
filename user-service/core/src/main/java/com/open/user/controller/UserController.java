@@ -1,11 +1,11 @@
 package com.open.user.controller;
 
 
-import com.open.common.controller.ResponseCode;
-import com.open.common.controller.ResponseWrapper;
+import com.open.api.entity.vo.ResponseCode;
+import com.open.api.entity.vo.ResponseWrapper;
 import com.open.common.exception.ServiceException;
 import com.open.user.api.UserUrl;
-import com.open.user.api.vo.UserVO;
+import com.open.user.api.entity.vo.UserVO;
 import com.open.user.dal.model.UserInfo;
 import com.open.user.service.biz.UserInfoService;
 import org.apache.commons.lang3.StringUtils;

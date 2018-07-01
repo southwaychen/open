@@ -5,12 +5,28 @@
     <groupId>com.open</groupId>
     <artifactId>user-service-api</artifactId>
     <version>1.0.0</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <packaging>jar</packaging>
     <name>user-service-api</name>
     <description>user-service-api</description>
 
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.open</groupId>
+            <artifactId>open-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 </project>
