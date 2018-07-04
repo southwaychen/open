@@ -7,22 +7,22 @@ import java.util.Date;
 
 public class BasePo implements Serializable {
 
-    private Date createdTime = Date.from(ZonedDateTime.now().toInstant());
-    private Date updatedTime = Date.from(ZonedDateTime.now().toInstant());
+    private Date createTime;
+    private Date updateTime ;
 
     public Date getCreatedTime() {
-        return createdTime;
+        return createTime;
     }
 
     public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
+        this.createTime = createdTime;
     }
 
     public Date getUpdatedTime() {
-        return updatedTime;
+        return updateTime;
     }
 
     public void setUpdatedTime(Date updatedTime) {
-        this.updatedTime = updatedTime;
+        this.updateTime = updatedTime;
     }
 }

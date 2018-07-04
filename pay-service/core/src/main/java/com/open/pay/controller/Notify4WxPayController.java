@@ -7,14 +7,13 @@ import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 import com.open.common.constant.PayConstant;
+import com.open.common.util.MyLog;
 import com.open.pay.dal.model.PayChannel;
 import com.open.pay.dal.model.PayOrder;
 import com.open.pay.service.base.PayChannelService;
 import com.open.pay.service.base.PayOrderService;
 import com.open.pay.service.channel.wechat.WxPayUtil;
 import org.apache.commons.io.IOUtils;
-//import com.open.framework.constant.PayConstant;
-import com.open.common.util.MyLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +26,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+
+//import com.open.framework.constant.PayConstant;
 
 /**
  * @Description: 接收处理微信通知

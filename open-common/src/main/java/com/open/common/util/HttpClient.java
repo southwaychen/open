@@ -1,6 +1,5 @@
 package com.open.common.util;
 
-import com.open.common.util.HttpClientUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

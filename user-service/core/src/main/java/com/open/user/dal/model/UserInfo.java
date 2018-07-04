@@ -1,13 +1,15 @@
 package com.open.user.dal.model;
 
-import com.open.common.domain.BaseModel;
+
+
+import com.open.common.entity.po.BasePo;
 
 import javax.persistence.Id;
 
 /**
  * Created by Tony on 6/10/2018.
  */
-public class UserInfo extends BaseModel{
+public class UserInfo extends BasePo{
 
     @Id
     private String userId;

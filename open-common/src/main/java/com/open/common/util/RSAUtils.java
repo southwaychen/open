@@ -1,5 +1,6 @@
 package com.open.common.util;
 
+import javax.crypto.Cipher;
 import java.math.BigInteger;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -10,7 +11,6 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.HashMap;
-import javax.crypto.Cipher;
 
 public class RSAUtils {
 	

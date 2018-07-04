@@ -1,7 +1,6 @@
 package com.open.pay.service.base;
 
 import com.open.pay.dal.model.MchInfo;
-import com.open.pay.service.base.BaseService;
 import org.springframework.stereotype.Service;
 
 

@@ -2,15 +2,14 @@ package com.open.pay.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.open.common.util.Base64Utils;
+import com.open.common.util.MyLog;
 import com.open.pay.dal.model.MchInfo;
 import com.open.pay.service.base.MchInfoService;
 import com.open.pay.service.mq.KafkaProducer;
 import org.apache.commons.lang3.StringUtils;
-import com.open.common.util.Base64Utils;
-import com.open.common.util.MyLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

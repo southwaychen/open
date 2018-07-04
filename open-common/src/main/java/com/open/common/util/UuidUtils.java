@@ -1,7 +1,6 @@
 package com.open.common.util;
 
 
-import java.util.Base64;
 import java.util.UUID;
 
 public class UuidUtils {

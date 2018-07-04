@@ -1,7 +1,5 @@
 package com.open.common.util;
 
-import com.open.common.util.MyLogInf;
-
 /**
  * @Description:
  * @author dingzhiwei jmdhappy@126.com

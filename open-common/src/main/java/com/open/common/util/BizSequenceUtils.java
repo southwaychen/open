@@ -1,7 +1,5 @@
 package com.open.common.util;
 
-import com.open.common.util.DateUtils;
-
 import java.text.DecimalFormat;
 import java.text.FieldPosition;
 import java.text.NumberFormat;

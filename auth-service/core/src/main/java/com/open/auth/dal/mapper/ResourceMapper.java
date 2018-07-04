@@ -1,6 +1,6 @@
 package com.open.auth.dal.mapper;
 
-import com.springboot.auth.authentication.entity.Resource;
+import com.open.auth.dal.model.Resource;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

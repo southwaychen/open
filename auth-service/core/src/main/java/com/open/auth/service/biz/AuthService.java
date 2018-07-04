@@ -1,21 +1,13 @@
 package com.open.auth.service.biz;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.jwt.Jwt;
-import org.springframework.security.jwt.JwtHelper;
-import org.springframework.security.jwt.crypto.sign.InvalidSignatureException;
-import org.springframework.security.jwt.crypto.sign.MacSigner;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class AuthService {
@@ -27,28 +19,28 @@ public class AuthService {
      */
     public static final String NONEXISTENT_URL = "NONEXISTENT_URL";
 
-    @Autowired
+   /* @Autowired
     private ResourceService resourceService;
 
-    /**
+    *//**
      * 系统中所有权限集合
-     */
+     *//*
     Map<RequestMatcher, ConfigAttribute> resourceConfigAttributes;
 
-    /**
+    *//**
      * 从数据库中加载注入
      *
      * @param resourceConfigAttributes
-     */
+     *//*
     @Autowired
     public AuthenticationService(Map<RequestMatcher, ConfigAttribute> resourceConfigAttributes) {
         this.resourceConfigAttributes = resourceConfigAttributes;
     }
 
-    /**
+    *//**
      * @param authRequest 访问的url,method
      * @return 有权限true, 无权限或全局资源中未找到请求url返回否
-     */
+     *//*
     @Override
     public boolean decide(HttpServletRequest authRequest) {
         log.debug("正在访问的url是:{}，method:{}", authRequest.getServletPath(), authRequest.getMethod());
@@ -64,23 +56,23 @@ public class AuthService {
         return isMatch(urlConfigAttribute, userResources);
     }
 
-    /**
+    *//**
      * url对应资源与用户拥有资源进行匹配
      *
      * @param urlConfigAttribute
      * @param userResources
      * @return
-     */
+     *//*
     public boolean isMatch(ConfigAttribute urlConfigAttribute, Set<Resource> userResources) {
         return userResources.stream().anyMatch(resource -> resource.getCode().equals(urlConfigAttribute.getAttribute()));
     }
 
-    /**
+    *//**
      * 根据url和method查询到对应的权限信息
      *
      * @param authRequest
      * @return
-     */
+     *//*
     public ConfigAttribute findConfigAttributesByUrl(HttpServletRequest authRequest) {
         return this.resourceConfigAttributes.keySet().stream()
                 .filter(requestMatcher -> requestMatcher.matches(authRequest))
@@ -90,12 +82,12 @@ public class AuthService {
                 .orElse(new SecurityConfig(NONEXISTENT_URL));
     }
 
-    /**
+    *//**
      * 根据用户所被授予的角色，查询到用户所拥有的资源
      *
      * @param authorityRoles
      * @return
-     */
+     *//*
     private Set<Resource> findResourcesByAuthorityRoles(Collection<? extends GrantedAuthority> authorityRoles) {
         //用户被授予的角色
         log.debug("用户的授权角色集合信息为:{}", authorityRoles);
@@ -108,6 +100,6 @@ public class AuthService {
             log.debug("用户被授予角色的资源数量是:{}, 资源集合信息为:{}", resources.size(), resources);
         }
         return resources;
-    }
+    }*/
 
 }

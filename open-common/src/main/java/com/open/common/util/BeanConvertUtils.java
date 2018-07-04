@@ -1,6 +1,5 @@
 package com.open.common.util;
 
-import com.open.common.util.DateTimeConverter;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.*;
