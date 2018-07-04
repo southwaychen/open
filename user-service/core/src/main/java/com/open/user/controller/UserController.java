@@ -6,8 +6,10 @@ import com.open.api.entity.vo.ResponseWrapper;
 import com.open.common.exception.ServiceException;
 import com.open.user.api.UserUrl;
 import com.open.user.api.entity.vo.UserVO;
-import com.open.user.dal.model.UserInfo;
-import com.open.user.service.biz.UserInfoService;
+import com.open.user.dal.entity.Role;
+import com.open.user.dal.entity.UserInfo;
+import com.open.user.service.biz.RoleService;
+import com.open.user.service.biz.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
 
 /**
  * Created by Tony on 6/10/2018.
@@ -24,17 +28,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    private UserInfoService userInfoService;
-
-    @RequestMapping(value = "/get")
-    public ResponseWrapper getUser(@RequestBody UserVO userVO){
-        ResponseWrapper responseWrapper = new ResponseWrapper();
-        UserInfo userInfo = new UserInfo();
-        BeanUtils.copyProperties(userVO,userInfo);
-        //responseWrapper.setData("hello","world");
-        responseWrapper.setData(userInfoService.getUserInfo(userInfo));
-        return responseWrapper;
-    }
+    private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     @RequestMapping(value = UserUrl.FIND_USER_BY_USERNAME)
     public ResponseWrapper findUserByUsername(@PathVariable("username") String username){
@@ -43,7 +39,7 @@ public class UserController {
         }
         UserInfo userInfoParam = new UserInfo();
         userInfoParam.setUsername(username);
-        UserInfo userInfoResult = userInfoService.getUserInfo(userInfoParam);
+        UserInfo userInfoResult = userService.getUserInfo(userInfoParam);
         if(userInfoResult == null){
             throw new ServiceException(ResponseCode.RET_USER_DATA_NOT_EXISTS.getCode(),ResponseCode.RET_USER_DATA_NOT_EXISTS.getMsg());
         }
@@ -51,6 +47,16 @@ public class UserController {
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(userInfoResult,userVO);
         responseWrapper.setData(userVO);
+        return responseWrapper;
+    }
+    @RequestMapping(value = UserUrl.QUERY_USER_ROLES_BY_USERID)
+    public ResponseWrapper queryUserRolesByUserId(@PathVariable("userId") String userId){
+        if(StringUtils.isEmpty(userId)){
+            throw new ServiceException(ResponseCode.RET_PARAM_NOT_FOUND.getCode(),ResponseCode.RET_PARAM_NOT_FOUND.getMsg());
+        }
+        Set<Role> roles = roleService.queryUserRolesByUserId(userId);
+        ResponseWrapper responseWrapper = new ResponseWrapper();
+        responseWrapper.setData(roles);
         return responseWrapper;
     }
 }

@@ -29,10 +29,10 @@ import java.util.Date;
  * @since 2017-10-29
  */
 
-public class SysRole implements Serializable {
+public class RoleVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer roleId;
+    private String roleId;
     private String roleName;
     private String roleCode;
     private String roleDesc;
@@ -42,7 +42,7 @@ public class SysRole implements Serializable {
 
     @Override
     public String toString() {
-        return "SysRole{" +
+        return "RoleVO{" +
                 ", roleId=" + roleId +
                 ", roleName=" + roleName +
                 ", roleCode=" + roleCode +
@@ -53,11 +53,11 @@ public class SysRole implements Serializable {
                 "}";
     }
 
-    public Integer getRoleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
 

@@ -4,7 +4,8 @@ import com.open.api.entity.vo.ResponseCode;
 import com.open.common.exception.ServiceException;
 import com.open.common.util.UuidUtils;
 import com.open.user.dal.mapper.UserInfoMapper;
-import com.open.user.dal.model.UserInfo;
+import com.open.user.dal.entity.UserInfo;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
  * Created by Tony on 6/10/2018.
  */
 @Service
-public class UserInfoService{
+public class UserService {
 
     @Autowired
     private UserInfoMapper userInfoMapper;

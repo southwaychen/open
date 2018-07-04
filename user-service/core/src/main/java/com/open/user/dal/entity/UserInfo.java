@@ -1,4 +1,4 @@
-package com.open.user.dal.model;
+package com.open.user.dal.entity;
 
 
 

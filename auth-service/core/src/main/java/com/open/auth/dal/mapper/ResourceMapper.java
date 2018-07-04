@@ -1,6 +1,6 @@
 package com.open.auth.dal.mapper;
 
-import com.open.auth.dal.model.Resource;
+import com.open.auth.dal.entity.Resource;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

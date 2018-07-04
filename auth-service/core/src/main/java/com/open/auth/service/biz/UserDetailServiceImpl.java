@@ -15,15 +15,24 @@
  * Author: lengleng (wangiegie@gmail.com)
  */
 
-package com.open.auth.service.base;
+package com.open.auth.service.biz;
 
-import com.open.auth.dal.model.UserDetailsImpl;
 import com.open.user.api.client.UserClient;
+import com.open.user.api.entity.vo.RoleVO;
 import com.open.user.api.entity.vo.UserVO;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author lengleng
@@ -32,12 +41,28 @@ import org.springframework.stereotype.Service;
  */
 @Service("userDetailService")
 public class UserDetailServiceImpl implements UserDetailsService {
+
+    private static final Log logger = LogFactory.getLog(UserDetailServiceImpl.class);
     @Autowired
     private UserClient userClient;
 
     @Override
-    public UserDetailsImpl loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserVO userVo = userClient.findUserByUsername(username).getData();
-        return new UserDetailsImpl(userVo);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserVO user = userClient.findUserByUsername(username).getData();
+        return new User(user.getUsername(),user.getPassword(),this.obtainGrantedAuthorities(user));
+    }
+
+    /**
+     * 获得登录者所有角色的权限集合.
+     *
+     * @param user
+     * @return
+     */
+    private Set<GrantedAuthority> obtainGrantedAuthorities(UserVO user) {
+        Set<RoleVO> roles = userClient.queryUserRolesByUserId(user.getUserId()).getData();
+        //logger.info("user:{},roles:{}", user.getUsername(), roles);
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getRoleCode()))
+                .collect(Collectors.toSet());
     }
 }

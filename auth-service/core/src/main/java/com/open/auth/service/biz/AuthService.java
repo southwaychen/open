@@ -97,7 +97,10 @@ public class AuthService {
                 .toArray(new String[authorityRoles.size()]);
         Set<Resource> resources = resourceService.queryByRoleCodes(authorityRoleCodes);
         if (log.isDebugEnabled()) {
-            log.debug("用户被授予角色的资源数量是:{}, 资源集合信息为:{}", resources.size(), resources);
+            l
+
+
+            og.debug("用户被授予角色的资源数量是:{}, 资源集合信息为:{}", resources.size(), resources);
         }
         return resources;
     }*/
