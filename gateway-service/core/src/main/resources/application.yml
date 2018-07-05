@@ -76,3 +76,8 @@ pagehelper:
 
 logging:
     config: classpath:log4j2.xml
+
+gate:
+  ignore:
+    authentication:
+      startWith: /oauth,/open

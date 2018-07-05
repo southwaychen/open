@@ -1,9 +1,9 @@
 package com.open.auth.dal.entity;
 
 
-import com.open.common.entity.po.BasePO;
+import com.open.common.entity.po.BasePo;
 
-public class Resource extends BasePO {
+public class Resource extends BasePo {
 
     private String code;
     private String name;
