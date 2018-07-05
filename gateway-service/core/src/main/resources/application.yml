@@ -47,7 +47,6 @@ spring:
             order: 8000
             predicates:
             - Path=/course
-
    kafka:
       producer:
           retries: 0
