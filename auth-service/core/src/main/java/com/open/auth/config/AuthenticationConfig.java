@@ -38,7 +38,7 @@ public class AuthenticationConfig extends AuthorizationServerConfigurerAdapter {
     DataSource dataSource;
 
     @Autowired
-    @Qualifier("userDetailsService")
+    @Qualifier("userDetailService")
     UserDetailsService userDetailsService;
 
     @Value("${spring.security.oauth2.jwt.signingKey}")

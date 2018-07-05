@@ -2,14 +2,14 @@ package com.open.user.dal.entity;
 
 
 
-import com.open.common.entity.po.BasePo;
+import com.open.common.entity.po.BasePO;
 
 import javax.persistence.Id;
 
 /**
  * Created by Tony on 6/10/2018.
  */
-public class UserInfo extends BasePo{
+public class UserInfo extends BasePO{
 
     @Id
     private String userId;

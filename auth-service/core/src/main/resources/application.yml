@@ -1,0 +1,82 @@
+server:
+  port: 3333
+
+spring:
+   application:
+      name: auth-service
+   profiles:
+      active: sit
+   datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.zaxxer.hikari.HikariDataSource
+      hikari:
+         minimum-idle: 5
+         maximum-pool-size: 15
+         auto-commit: true
+         idle-timeout: 30000
+         pool-name: DatebookHikariCP
+         max-lifetime: 1800000
+         connection-timeout: 30000
+         connection-test-query: SELECT 1
+         connection-init-sql: SELECT 1
+   redis:
+      password:
+      lettuce:
+         pool:
+           max-active: 8
+           max-wait: -1
+           max-idle: 8
+           min-idle: 0
+         shutdown-timeout: 100
+   cloud:
+      consul:
+          discovery:
+             healthCheckInterval: 15s
+             instance-id: ${spring.application.name}
+   kafka:
+      producer:
+          retries: 0
+          batch-size: 16384
+          buffer-memory: 33554432
+          key-serializer: org.apache.kafka.common.serialization.StringSerializer
+          value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      consumer:
+          group-id: foo
+          auto-offset-reset: earliest
+          enable-auto-commit: true
+          auto-commit-interval: 100
+          key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+          value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+   security:
+      oauth2:
+          jwt:
+            signingKey: 123456
+
+mybatis:
+   type-aliases-package: com.open.auth.dal.model
+   configuration-properties:
+      cacheEnabled: true
+      lazyLoadingEnabled: true
+      multipleResultSetsEnabled: true
+      useColumnLabel: true
+      useGeneratedKeys: false
+      defaultExecutorType: SIMPLE
+      defaultStatementTimeout: 25000
+      mapUnderscoreToCamelCase: true
+
+
+mapper:
+   mappers: tk.mybatis.mapper.common.Mapper
+   not-empty: false
+   identity: MYSQL
+
+pagehelper:
+    helperDialect: MySQL
+    reasonable: true
+    supportMethodsArguments: true
+    params=count: countSql
+    offset-as-page-num: true
+    row-bounds-with-count: true
+
+logging:
+    config: classpath:log4j2.xml

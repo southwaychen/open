@@ -1,9 +1,10 @@
 package com.open.user.dal.entity;
 
 
-import com.open.common.entity.po.BasePo;
+import com.open.common.entity.po.BasePO;
 
-public class Role extends BasePo {
+
+public class Role extends BasePO {
     private String code;
     private String name;
     private String desc;
