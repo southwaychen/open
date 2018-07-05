@@ -19,13 +19,12 @@ package com.open.user.api.entity.vo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author lengleng
  * @date 2017/10/29
  */
-public class UserVO implements Serializable {
+public class UserVo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**

@@ -19,7 +19,7 @@ package com.open.auth.service.biz;
 
 import com.open.user.api.client.UserClient;
 import com.open.user.api.entity.vo.RoleVO;
-import com.open.user.api.entity.vo.UserVO;
+import com.open.user.api.entity.vo.UserVo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserVO user = userClient.findUserByUsername(username).getData();
+        UserVo user = userClient.findUserByUsername(username).getData();
         return new User(user.getUsername(),user.getPassword(),this.obtainGrantedAuthorities(user));
     }
 
@@ -58,7 +58,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
      * @param user
      * @return
      */
-    private Set<GrantedAuthority> obtainGrantedAuthorities(UserVO user) {
+    private Set<GrantedAuthority> obtainGrantedAuthorities(UserVo user) {
         Set<RoleVO> roles = userClient.queryUserRolesByUserId(user.getUserId()).getData();
         //logger.info("user:{},roles:{}", user.getUsername(), roles);
         return roles.stream()

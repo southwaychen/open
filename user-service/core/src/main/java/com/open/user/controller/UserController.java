@@ -5,7 +5,7 @@ import com.open.api.entity.vo.ResponseCode;
 import com.open.api.entity.vo.ResponseWrapper;
 import com.open.common.exception.ServiceException;
 import com.open.user.api.UserUrl;
-import com.open.user.api.entity.vo.UserVO;
+import com.open.user.api.entity.vo.UserVo;
 import com.open.user.dal.entity.Role;
 import com.open.user.dal.entity.UserInfo;
 import com.open.user.service.biz.RoleService;
@@ -14,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,8 +42,8 @@ public class UserController {
         if(userInfoResult == null){
             throw new ServiceException(ResponseCode.RET_USER_DATA_NOT_EXISTS.getCode(),ResponseCode.RET_USER_DATA_NOT_EXISTS.getMsg());
         }
-        ResponseWrapper<UserVO> responseWrapper = new ResponseWrapper<UserVO>();
-        UserVO userVO = new UserVO();
+        ResponseWrapper<UserVo> responseWrapper = new ResponseWrapper<UserVo>();
+        UserVo userVO = new UserVo();
         BeanUtils.copyProperties(userInfoResult,userVO);
         responseWrapper.setData(userVO);
         return responseWrapper;

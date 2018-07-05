@@ -1,9 +1,9 @@
 package com.open.auth.controller;
 
-import com.open.auth.api.AuthUrl;
-import com.open.auth.api.entity.vo.JwtVo;
 import com.open.api.entity.vo.ResponseWrapper;
 import com.open.api.entity.vo.TrueOrFalseVo;
+import com.open.auth.api.AuthUrl;
+import com.open.auth.api.entity.vo.JwtVo;
 import com.open.auth.service.biz.AuthService;
 import com.open.user.api.client.UserClient;
 import org.apache.commons.lang.StringUtils;
@@ -17,7 +17,10 @@ import org.springframework.security.jwt.JwtHelper;
 import org.springframework.security.jwt.crypto.sign.InvalidSignatureException;
 import org.springframework.security.jwt.crypto.sign.MacSigner;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;

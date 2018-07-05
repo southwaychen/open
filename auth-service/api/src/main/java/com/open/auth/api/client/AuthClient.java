@@ -1,10 +1,10 @@
 package com.open.auth.api.client;
 
 
-import com.open.auth.api.AuthUrl;
-import com.open.auth.api.entity.vo.JwtVo;
 import com.open.api.entity.vo.ResponseWrapper;
 import com.open.api.entity.vo.TrueOrFalseVo;
+import com.open.auth.api.AuthUrl;
+import com.open.auth.api.entity.vo.JwtVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;

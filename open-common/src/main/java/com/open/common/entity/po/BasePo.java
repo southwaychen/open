@@ -2,7 +2,6 @@ package com.open.common.entity.po;
 
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
 import java.util.Date;
 
 public class BasePo implements Serializable {
