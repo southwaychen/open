@@ -17,10 +17,11 @@
 
 package com.open.auth.dal.model;
 
+import com.crt.open.api.vo.SysRole;
 import com.open.common.constant.CommonConstant;
 import com.open.common.constant.SecurityConstants;
 import com.open.user.api.entity.vo.UserVO;
-import com.open.user.api.entity.vo.SysRole;
+import com.open.user.api.entity.vo.RoleVO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -40,20 +41,20 @@ public class UserDetailsImpl implements UserDetails {
     private String username;
     private String password;
     private String status;
-    private List<SysRole> roleList = new ArrayList<SysRole>();
+    private List<RoleVO> roleList = new ArrayList<RoleVO>();
 
     public UserDetailsImpl(UserVO userVo) {
         this.userId = userVo.getUserId();
         this.username = userVo.getUsername();
         this.password = userVo.getPassword();
         this.status = userVo.getDelFlag();
-        roleList = userVo.getRoleList();
+        //roleList = userVo.getRoleList();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        for (SysRole role : roleList) {
+        for (RoleVO role : roleList) {
             authorityList.add(new SimpleGrantedAuthority(role.getRoleCode()));
         }
         authorityList.add(new SimpleGrantedAuthority(SecurityConstants.BASE_ROLE));
@@ -98,11 +99,11 @@ public class UserDetailsImpl implements UserDetails {
         this.password = password;
     }
 
-    public List<SysRole> getRoleList() {
+    public List<RoleVO> getRoleList() {
         return roleList;
     }
 
-    public void setRoleList(List<SysRole> roleList) {
+    public void setRoleList(List<RoleVO> roleList) {
         this.roleList = roleList;
     }
 

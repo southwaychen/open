@@ -27,7 +27,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableAuthorizationServer
-public class AuthenticationServerConfig extends AuthorizationServerConfigurerAdapter {
+public class AuthenticationConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     @Qualifier("authenticationManagerBean")

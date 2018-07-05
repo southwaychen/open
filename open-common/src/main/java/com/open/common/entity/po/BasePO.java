@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
-public class BasePo implements Serializable {
+public class BasePO implements Serializable {
 
     private Date createTime;
     private Date updateTime ;
