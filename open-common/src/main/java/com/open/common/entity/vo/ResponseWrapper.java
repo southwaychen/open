@@ -1,4 +1,4 @@
-package com.open.api.entity.vo;
+package com.open.common.entity.vo;
 
 import java.io.Serializable;
 import java.util.HashMap;

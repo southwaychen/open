@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.concurrent.TimeUnit;
 
-@Component
+//@Component
 public class ThrottleGatewayFilter implements GatewayFilter, Ordered {
     private static final Log logger = LogFactory.getLog(ThrottleGatewayFilter.class);
 

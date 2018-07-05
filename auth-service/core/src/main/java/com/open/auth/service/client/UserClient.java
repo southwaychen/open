@@ -1,7 +1,7 @@
-package com.open.user.api.client;
+package com.open.auth.service.client;
 
 
-import com.open.api.entity.vo.ResponseWrapper;
+import com.open.common.entity.vo.ResponseWrapper;
 import com.open.user.api.UserUrl;
 import com.open.user.api.entity.vo.RoleVO;
 import com.open.user.api.entity.vo.UserVo;

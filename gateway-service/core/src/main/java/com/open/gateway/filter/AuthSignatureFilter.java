@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 /**
  * 调用鉴权
  */
-@Component
+//@Component
 public class AuthSignatureFilter implements GlobalFilter, Ordered {
 
     @Override

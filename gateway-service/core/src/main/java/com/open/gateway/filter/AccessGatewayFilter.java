@@ -1,6 +1,6 @@
 package com.open.gateway.filter;
 
-import com.open.auth.api.client.AuthClient;
+import com.open.gateway.service.client.AuthClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 /**
  * 请求url权限校验
  */
-@Configuration
+//@Configuration
 public class AccessGatewayFilter implements GlobalFilter {
 
     private static Logger logger = LoggerFactory.getLogger(AccessGatewayFilter.class);

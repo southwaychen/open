@@ -1,6 +1,6 @@
 package com.open.auth.controller;
 
-import com.open.api.entity.vo.ResponseWrapper;
+import com.open.common.entity.vo.ResponseWrapper;
 import com.open.api.entity.vo.TrueOrFalseVo;
 import com.open.auth.api.AuthUrl;
 import com.open.auth.api.entity.vo.JwtVo;
