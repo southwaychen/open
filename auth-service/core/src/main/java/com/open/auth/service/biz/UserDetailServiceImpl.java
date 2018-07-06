@@ -17,7 +17,7 @@
 
 package com.open.auth.service.biz;
 
-import com.open.user.api.client.UserClient;
+import com.open.auth.service.client.UserClient;
 import com.open.user.api.entity.vo.RoleVO;
 import com.open.user.api.entity.vo.UserVo;
 import org.apache.commons.logging.Log;

@@ -24,8 +24,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.authorizeRequests()
+        http.csrf().disable()
+                .formLogin().loginPage("/auth/require")
+                .loginProcessingUrl("/auth/form")
+                .and()
+        .authorizeRequests()
+                .antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated();
     }
 
@@ -33,6 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/css/**","/js/**","/lib/**","/img/**","/skin/**","/actuator/health");
     }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
