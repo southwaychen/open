@@ -18,7 +18,7 @@
 package com.open.auth.service.biz;
 
 import com.open.auth.service.client.UserClient;
-import com.open.user.api.entity.vo.RoleVO;
+import com.open.user.api.entity.vo.RoleVo;
 import com.open.user.api.entity.vo.UserVo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -59,7 +59,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
      * @return
      */
     private Set<GrantedAuthority> obtainGrantedAuthorities(UserVo user) {
-        Set<RoleVO> roles = userClient.queryUserRolesByUserId(user.getUserId()).getData();
+        Set<RoleVo> roles = userClient.queryUserRolesByUserId(user.getUserId()).getData();
         //logger.info("user:{},roles:{}", user.getUsername(), roles);
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRoleCode()))

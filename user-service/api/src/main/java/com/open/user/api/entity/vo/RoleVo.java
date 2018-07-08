@@ -29,7 +29,7 @@ import java.util.Date;
  * @since 2017-10-29
  */
 
-public class RoleVO implements Serializable {
+public class RoleVo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String roleId;
@@ -42,7 +42,7 @@ public class RoleVO implements Serializable {
 
     @Override
     public String toString() {
-        return "RoleVO{" +
+        return "RoleVo{" +
                 ", roleId=" + roleId +
                 ", roleName=" + roleName +
                 ", roleCode=" + roleCode +

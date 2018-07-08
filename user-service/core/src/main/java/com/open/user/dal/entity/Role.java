@@ -3,33 +3,24 @@ package com.open.user.dal.entity;
 
 import com.open.common.entity.po.BasePo;
 
+import javax.persistence.Id;
+import java.util.Date;
+
 
 public class Role extends BasePo {
-    private String code;
-    private String name;
-    private String desc;
 
-    public String getCode() {
-        return code;
+    @Id
+    private String roleId;
+    private String roleName;
+    private String roleCode;
+    private String roleDesc;
+    private String delFlag;
+
+    public String getRoleId() {
+        return roleId;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
 }
