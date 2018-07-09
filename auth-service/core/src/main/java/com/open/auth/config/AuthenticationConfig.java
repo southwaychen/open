@@ -44,18 +44,7 @@ public class AuthenticationConfig extends AuthorizationServerConfigurerAdapter {
     @Value("${spring.security.oauth2.jwt.signingKey}")
     private String signingKey;
 
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
-        oauthServer.tokenKeyAccess("isAuthenticated()")
-                .checkTokenAccess("permitAll()");
-    }
-
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        //配置客户端信息，从数据库中读取，对应oauth_client_details表
-        clients.jdbc(dataSource);
-    }
-
+    //告诉Spring Security Token的生成方式
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         //配置token的数据源、自定义的tokenServices等信息,配置身份认证器，配置认证方式，TokenStore，TokenGranter，OAuth2RequestFactory
@@ -65,33 +54,49 @@ public class AuthenticationConfig extends AuthorizationServerConfigurerAdapter {
                 .userDetailsService(userDetailsService);
     }
 
-    @Bean
-    public ApprovalStore approvalStore() {
-        return new JdbcApprovalStore(dataSource);
-    }
-
-    @Bean
-    protected AuthorizationCodeServices authorizationCodeServices() {
-        //授权码存储等处理方式类，使用jdbc，操作oauth_code表
-        return new JdbcAuthorizationCodeServices(dataSource);
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
+        oauthServer
+                //允许所有资源服务器访问公钥端点（/oauth/token_key）
+                //只允许验证用户访问令牌解析端点（/oauth/check_token）
+                .tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()")
+                // 允许客户端发送表单来进行权限认证来获取令牌
+                .allowFormAuthenticationForClients();
     }
 
     @Bean
     public TokenStore tokenStore() {
-        return new JwtTokenStore(accessTokenConverter());
+        return new JwtTokenStore(jwtAccessTokenConverter());
     }
 
     @Bean
-    public TokenEnhancerChain tokenEnhancerChain() {
-        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(new CustomTokenEnhancer(), accessTokenConverter()));
-        return tokenEnhancerChain;
-    }
-
-    @Bean
-    public JwtAccessTokenConverter accessTokenConverter() {
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setSigningKey(signingKey);
         return converter;
     }
+
+
+
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        //配置客户端信息，从数据库中读取，对应oauth_client_details表
+        //clients.jdbc(dataSource);
+        //添加客户端信息
+        clients.inMemory()                  // 使用in-memory存储客户端信息
+                .withClient("client")       // client_id
+                .secret("secret")                   // client_secret
+                .authorizedGrantTypes("authorization_code","client_credentials","password")     // 该client允许的授权类型
+                .scopes("app");                     // 允许的授权范围
+    }
+
+    //自定义令牌声明，添加额外的属性
+    @Bean
+    public TokenEnhancerChain tokenEnhancerChain() {
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(new CustomTokenEnhancer(), jwtAccessTokenConverter()));
+        return tokenEnhancerChain;
+    }
+
+
 }

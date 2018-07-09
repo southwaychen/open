@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -24,13 +25,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .formLogin().loginPage("/auth/require")
-                .loginProcessingUrl("/auth/form")
+        http.authorizeRequests()
+                .anyRequest()
+                .authenticated()
                 .and()
-        .authorizeRequests()
-                .antMatchers("/auth/**").permitAll()
-                .anyRequest().authenticated();
+                .httpBasic();
     }
 
     @Override
@@ -41,7 +40,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-       // authenticationManagerBuilder
+       authenticationManagerBuilder.inMemoryAuthentication()
+               .withUser("root")
+               .password("123456")
+               .roles("USER");
                // .userDetailsService(userDetailsService)
               //  .passwordEncoder(passwordEncoder());
     }
@@ -53,9 +55,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    @Bean
+    /*@Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }*/
+
+    @Bean
+    public static NoOpPasswordEncoder passwordEncoder() {
+        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }
 
 }
