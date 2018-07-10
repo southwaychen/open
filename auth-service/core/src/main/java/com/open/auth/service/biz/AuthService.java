@@ -4,16 +4,20 @@ import com.open.auth.dal.entity.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -34,7 +38,25 @@ public class AuthService {
     /**
      * 系统中所有权限集合
      */
-    Map<RequestMatcher, ConfigAttribute> resourceConfigAttributes;
+    Map<RequestMatcher, ConfigAttribute> resourceConfigAttributes= new HashMap() {
+        {
+            MvcRequestMatcher mvcRequestMatcher1 = new MvcRequestMatcher(new HandlerMappingIntrospector(), "/users");
+            mvcRequestMatcher1.setMethod(HttpMethod.resolve("POST"));
+            MvcRequestMatcher mvcRequestMatcher2 = new MvcRequestMatcher(new HandlerMappingIntrospector(), "/users/{id}");
+            mvcRequestMatcher2.setMethod(HttpMethod.resolve("PUT"));
+            MvcRequestMatcher mvcRequestMatcher3 = new MvcRequestMatcher(new HandlerMappingIntrospector(), "/users/{id}");
+            mvcRequestMatcher3.setMethod(HttpMethod.resolve("DELETE"));
+            MvcRequestMatcher mvcRequestMatcher4 = new MvcRequestMatcher(new HandlerMappingIntrospector(), "/users/{id}");
+            mvcRequestMatcher4.setMethod(HttpMethod.resolve("GET"));
+            MvcRequestMatcher mvcRequestMatcher5 = new MvcRequestMatcher(new HandlerMappingIntrospector(), "/users/{id}/order");
+            mvcRequestMatcher5.setMethod(HttpMethod.resolve("GET"));
+            put(mvcRequestMatcher1, new SecurityConfig("user_manager:btn_add"));
+            put(mvcRequestMatcher2, new SecurityConfig("user_manager:btn_edit"));
+            put(mvcRequestMatcher3, new SecurityConfig("user_manager:btn_del"));
+            put(mvcRequestMatcher4, new SecurityConfig("user_manager:view"));
+            put(mvcRequestMatcher5, new SecurityConfig("user_order:view"));
+        }
+    };
 
 
     /**

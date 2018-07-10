@@ -44,7 +44,10 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     @Value("${spring.security.oauth2.jwt.signingKey}")
     private String signingKey;
 
-    //告诉Spring Security Token的生成方式
+    /*
+     * 配置授权服务器端点，如令牌存储，令牌自定义，用户批准和授权类型，不包括端点安全配置
+     *告诉Spring Security Token的生成方式
+     */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         //配置token的数据源、自定义的tokenServices等信息,配置身份认证器，配置认证方式，TokenStore，TokenGranter，OAuth2RequestFactory
@@ -53,7 +56,9 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService);
     }
-
+    /*
+    * 配置授权服务器端点的安全
+    * */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
         oauthServer
@@ -64,6 +69,11 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
                 .allowFormAuthenticationForClients();
     }
 
+    /*
+    * InMemoryTokenStore：实现了在内存中存储令牌
+      JdbcTokenStore：通过 JDBC 方式存储令牌
+      JwtTokenStore：通过 JWT 方式存储令牌
+    * */
     @Bean
     public TokenStore tokenStore() {
         return new JwtTokenStore(jwtAccessTokenConverter());
@@ -76,8 +86,9 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
         return converter;
     }
 
-
-
+    /*
+    * 配置 ClientDetailsService 也就是客户端属性信息
+    * */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         //配置客户端信息，从数据库中读取，对应oauth_client_details表

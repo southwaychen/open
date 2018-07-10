@@ -12,15 +12,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.jwt.Jwt;
 import org.springframework.security.jwt.JwtHelper;
 import org.springframework.security.jwt.crypto.sign.InvalidSignatureException;
 import org.springframework.security.jwt.crypto.sign.MacSigner;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
@@ -66,9 +65,9 @@ public class AuthController {
         return responseWrapper;
     }
 
-    @RequestMapping(value = AuthUrl.CHECK_PERMISSION)
+    @RequestMapping(value = "/checkPermission")
     @ResponseBody
-    public ResponseWrapper checkPermission(HttpServletRequest request, String authentication, String url, String method){
+    public ResponseWrapper checkPermission(HttpServletRequest request, @RequestParam ("authentication") String authentication, @RequestParam("url") String url, @RequestParam("method") String method){
         //token是否有效
         ResponseWrapper responseWrapper = new ResponseWrapper();
         if (invalidJwtAccessToken(authentication)) {
@@ -87,6 +86,7 @@ public class AuthController {
     @ResponseBody
     public ResponseWrapper findUserByUsername(@PathVariable("username") String username){
         ResponseWrapper responseWrapper = userClient.findUserByUsername(username);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return responseWrapper;
     }
 
