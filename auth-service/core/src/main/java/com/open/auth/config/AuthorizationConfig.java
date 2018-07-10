@@ -92,13 +92,13 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         //配置客户端信息，从数据库中读取，对应oauth_client_details表
-        //clients.jdbc(dataSource);
+        clients.jdbc(dataSource);
         //添加客户端信息
-        clients.inMemory()                  // 使用in-memory存储客户端信息
+        /*clients.inMemory()                  // 使用in-memory存储客户端信息
                 .withClient("client")       // client_id
                 .secret("secret")                   // client_secret
                 .authorizedGrantTypes("authorization_code","client_credentials","password")     // 该client允许的授权类型
-                .scopes("app");                     // 允许的授权范围
+                .scopes("app");  */                   // 允许的授权范围
     }
 
     //自定义令牌声明，添加额外的属性

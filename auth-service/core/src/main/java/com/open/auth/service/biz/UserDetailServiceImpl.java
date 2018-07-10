@@ -31,6 +31,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -49,7 +50,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserVo user = userClient.findUserByUsername(username).getData();
-        return new User(user.getUsername(),user.getPassword(),this.obtainGrantedAuthorities(user));
+        if(user == null){
+            return null;
+        }
+        Set<GrantedAuthority> grantedAuthorities=new HashSet<GrantedAuthority>();
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        return new User(user.getUsername(),user.getPassword(),grantedAuthorities);
     }
 
     /**
@@ -58,11 +64,11 @@ public class UserDetailServiceImpl implements UserDetailsService {
      * @param user
      * @return
      */
-    private Set<GrantedAuthority> obtainGrantedAuthorities(UserVo user) {
+    /*private Set<GrantedAuthority> obtainGrantedAuthorities(UserVo user) {
         Set<RoleVo> roles = userClient.queryUserRolesByUserId(user.getUserId()).getData();
         //logger.info("user:{},roles:{}", user.getUsername(), roles);
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRoleCode()))
                 .collect(Collectors.toSet());
-    }
+    }*/
 }

@@ -40,12 +40,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-       authenticationManagerBuilder.inMemoryAuthentication()
+       /*authenticationManagerBuilder.inMemoryAuthentication()
                .withUser("root")
                .password("123456")
-               .roles("USER");
-               // .userDetailsService(userDetailsService)
-              //  .passwordEncoder(passwordEncoder());
+               .roles("USER");*/
+        authenticationManagerBuilder
+               .userDetailsService(userDetailsService)
+               .passwordEncoder(passwordEncoder());
     }
 
     // 将 AuthenticationManager 注册为 bean , 方便配置 oauth server 的时候使用

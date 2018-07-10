@@ -70,16 +70,18 @@ public class AuthController {
     public ResponseWrapper checkPermission(HttpServletRequest request, @RequestParam ("authentication") String authentication, @RequestParam("url") String url, @RequestParam("method") String method){
         //token是否有效
         ResponseWrapper responseWrapper = new ResponseWrapper();
-        if (invalidJwtAccessToken(authentication)) {
-            responseWrapper.setData(new TrueOrFalseVo());
-            return responseWrapper;
-        }
-        //从认证服务获取是否有权限
-        Boolean result = authService.decide(new HttpServletRequestAuthWrapper(request, url, method));
+        Boolean result = checkAccessToken(authentication);
         TrueOrFalseVo trueOrFalseVo = new TrueOrFalseVo();
         trueOrFalseVo.setResult(result);
         responseWrapper.setData(trueOrFalseVo);
         return responseWrapper;
+
+        //从认证服务获取是否有权限
+        /*Boolean result = authService.decide(new HttpServletRequestAuthWrapper(request, url, method));
+        TrueOrFalseVo trueOrFalseVo = new TrueOrFalseVo();
+        trueOrFalseVo.setResult(result);
+        responseWrapper.setData(trueOrFalseVo);*/
+        //return responseWrapper;
     }
 
     @RequestMapping(value = AuthUrl.FIND_USER_BY_USERNAME)
@@ -90,17 +92,17 @@ public class AuthController {
         return responseWrapper;
     }
 
-    private boolean invalidJwtAccessToken(String authentication) {
+    private boolean checkAccessToken(String authentication) {
         verifier = Optional.ofNullable(verifier).orElse(new MacSigner(signingKey));
         //是否无效true表示无效
-        boolean invalid = Boolean.TRUE;
+        boolean valid = Boolean.FALSE;
         try {
             Jwt jwt = JwtHelper.decode(StringUtils.substring(authentication, BEARER_BEGIN_INDEX));
             jwt.verifySignature(verifier);
-            invalid = Boolean.FALSE;
+            valid = Boolean.TRUE;
         } catch (InvalidSignatureException | IllegalArgumentException ex) {
             logger.warn("user token has expired or signature error ");
         }
-        return invalid;
+        return valid;
     }
 }
