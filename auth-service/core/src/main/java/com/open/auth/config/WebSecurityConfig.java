@@ -29,12 +29,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                    .anyRequest()
                    .authenticated()
-                //.and()
-                  /* .exceptionHandling()
-                   .authenticationEntryPoint(new LoginUrlEntryPoint())*/
+               // .and()
+               //    .exceptionHandling()
+               //    .authenticationEntryPoint(new LoginUrlEntryPoint())
                 .and()
-                   .httpBasic();
-                  // .formLogin().loginPage("/auth/login").loginProcessingUrl("/auth/login").permitAll();
+                  // .httpBasic();
+                   .formLogin().loginPage("/login").permitAll();
     }
 
     @Override
