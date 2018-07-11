@@ -49,10 +49,10 @@ public class AuthController {
      * 认证页面
      * @return ModelAndView
      */
-    @GetMapping("/require")
+    /*@GetMapping("/login")
     public String require() {
         return "login";
-    }
+    }*/
 
     @RequestMapping(value = AuthUrl.GET_JWT)
     @ResponseBody

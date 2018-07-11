@@ -17,11 +17,13 @@ import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.endpoint.AuthorizationEndpoint;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.util.Arrays;
 
@@ -32,6 +34,8 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     @Qualifier("authenticationManagerBean")
     private AuthenticationManager authenticationManager;
+    //@Autowired
+    //private AuthorizationEndpoint authorizationEndpoint;
 
     @Qualifier("dataSource")
     @Autowired
@@ -43,6 +47,13 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
     @Value("${spring.security.oauth2.jwt.signingKey}")
     private String signingKey;
+
+
+    /*@PostConstruct
+    public void init() {
+        authorizationEndpoint.setUserApprovalPage("forward:/oauth/custom_confirm_access");
+        authorizationEndpoint.setErrorPage("forward:/oauth/custom_error");
+    }*/
 
     /*
      * 配置授权服务器端点，如令牌存储，令牌自定义，用户批准和授权类型，不包括端点安全配置

@@ -1,5 +1,6 @@
 package com.open.auth.config;
 
+import com.open.auth.security.LoginUrlEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -26,10 +27,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest()
-                .authenticated()
+                   .anyRequest()
+                   .authenticated()
+                //.and()
+                  /* .exceptionHandling()
+                   .authenticationEntryPoint(new LoginUrlEntryPoint())*/
                 .and()
-                .httpBasic();
+                   .httpBasic();
+                  // .formLogin().loginPage("/auth/login").loginProcessingUrl("/auth/login").permitAll();
     }
 
     @Override
