@@ -18,7 +18,6 @@
 package com.open.auth.service.biz;
 
 import com.open.auth.service.client.UserClient;
-import com.open.user.api.entity.vo.RoleVo;
 import com.open.user.api.entity.vo.UserVo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,7 +32,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author lengleng

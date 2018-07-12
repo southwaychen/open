@@ -4,7 +4,6 @@ package com.open.user.dal.entity;
 import com.open.common.entity.po.BasePo;
 
 import javax.persistence.Id;
-import java.util.Date;
 
 
 public class Role extends BasePo {
