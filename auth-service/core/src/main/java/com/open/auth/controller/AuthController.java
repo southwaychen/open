@@ -2,6 +2,7 @@ package com.open.auth.controller;
 
 import com.open.api.entity.vo.TrueOrFalseVo;
 import com.open.auth.api.AuthUrl;
+import com.open.auth.api.entity.vo.AuthVo;
 import com.open.auth.api.entity.vo.JwtVo;
 import com.open.auth.service.biz.AuthService;
 import com.open.auth.service.client.UserClient;
@@ -19,10 +20,7 @@ import org.springframework.security.jwt.JwtHelper;
 import org.springframework.security.jwt.crypto.sign.InvalidSignatureException;
 import org.springframework.security.jwt.crypto.sign.MacSigner;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
@@ -70,10 +68,10 @@ public class AuthController {
 
     @RequestMapping(value = "/checkPermission")
     @ResponseBody
-    public ResponseWrapper checkPermission(HttpServletRequest request, @RequestParam ("authentication") String authentication, @RequestParam("url") String url, @RequestParam("method") String method){
+    public ResponseWrapper checkPermission(@RequestBody AuthVo authVo){
         //token是否有效
         ResponseWrapper responseWrapper = new ResponseWrapper();
-        Boolean result = checkAccessToken(authentication);
+        Boolean result = checkAccessToken(authVo.getAuthentication());
         TrueOrFalseVo trueOrFalseVo = new TrueOrFalseVo();
         trueOrFalseVo.setResult(result);
         responseWrapper.setData(trueOrFalseVo);

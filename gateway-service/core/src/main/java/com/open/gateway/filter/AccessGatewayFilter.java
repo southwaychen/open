@@ -1,5 +1,6 @@
 package com.open.gateway.filter;
 
+import com.open.auth.api.entity.vo.AuthVo;
 import com.open.gateway.service.client.AuthClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +52,9 @@ public class AccessGatewayFilter implements GlobalFilter {
             return chain.filter(exchange);
         }*/
         //调用签权服务看用户是否有权限，若有权限进入下一个filter
-        if (authClient.checkPermission(authentication, url, method).getData().getResult()) {
+        AuthVo authVo = new AuthVo();
+        authVo.setAuthentication(authentication);
+        if (authClient.checkPermission(authVo).getData().getResult()) {
             ServerHttpRequest.Builder builder = request.mutate();
             //TODO 转发的请求都加上服务间认证token
             builder.header(X_CLIENT_TOKEN, "TODO zhoutaoo添加服务间简单认证");
