@@ -6,6 +6,9 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.*;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.security.web.util.RedirectUrlBuilder;
 import org.springframework.security.web.util.UrlUtils;
 import org.springframework.util.Assert;
@@ -24,6 +27,7 @@ public class LoginUrlEntryPoint implements AuthenticationEntryPoint , Initializi
     private String loginFormUrl;
     private boolean forceHttps = false;
     private boolean useForward = false;
+    private RequestCache requestCache = new HttpSessionRequestCache();
     private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     public LoginUrlEntryPoint(String loginFormUrl) {
@@ -47,6 +51,7 @@ public class LoginUrlEntryPoint implements AuthenticationEntryPoint , Initializi
 
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         String redirectUrl = null;
+        SavedRequest savedRequest = this.requestCache.getRequest(request, response);
         if(this.useForward) {
             if(this.forceHttps && "http".equals(request.getScheme())) {
                 redirectUrl = this.buildHttpsRedirectUrlForRequest(request);

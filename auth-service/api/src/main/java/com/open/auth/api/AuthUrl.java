@@ -15,8 +15,8 @@ public interface AuthUrl {
 
     public final static String AUTH_GET_JWT = SERVICE_PREFIX + "/getJwt/{authentication}";
 
-    public final static String CHECK_PERMISSION = "/checkPermission/{authentication}/{url}/{method}";
+    public final static String CHECK_PERMISSION = "/checkPermission";
 
-    public final static String AUTH_CHECK_PERMISSION = SERVICE_PREFIX + "/checkPermission/{authentication}/{url}/{method}";
+    public final static String AUTH_CHECK_PERMISSION = SERVICE_PREFIX + "/checkPermission";
 
 }

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping(value =AuthUrl.SERVICE_PREFIX)
 public class AuthController {
 
@@ -56,7 +56,6 @@ public class AuthController {
     }*/
 
     @RequestMapping(value = AuthUrl.GET_JWT)
-    @ResponseBody
     public ResponseWrapper getJwt(@PathVariable("authentication") String authentication){
         ResponseWrapper responseWrapper = new ResponseWrapper();
         Jwt jwt = JwtHelper.decode(StringUtils.substring(authentication, BEARER_BEGIN_INDEX));
@@ -66,8 +65,7 @@ public class AuthController {
         return responseWrapper;
     }
 
-    @RequestMapping(value = "/checkPermission")
-    @ResponseBody
+    @RequestMapping(value = AuthUrl.CHECK_PERMISSION)
     public ResponseWrapper checkPermission(@RequestBody AuthVo authVo){
         //token是否有效
         ResponseWrapper responseWrapper = new ResponseWrapper();
