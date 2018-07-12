@@ -68,18 +68,18 @@
         <AsyncLogger name="org.springframework" level="WARN" />
         <AsyncLogger name="com.apache" level="WARN" />
         <AsyncLogger name="org.apache.kafka" level="WARN" />
-        <AsyncLogger name="org.apache.commons.httpclient.util.IdleConnectionHandler" level="ERROR" />
-        <AsyncLogger name="org.apache.http.client.protocol.RequestAddCookies" level="ERROR" />
-        <AsyncLogger name="org.apache.http.client.protocol.RequestAuthCache" level="ERROR" />
-        <AsyncLogger name="org.apache.http.impl" level="ERROR" />
-        <AsyncLogger name="org.apache.http.headers" level="ERROR" />
-        <AsyncLogger name="org.apache.http.wire" level="ERROR" />
-        <AsyncLogger name="org.hibernate" level="ERROR" />
-        <AsyncLogger name="io.lettuce" level="ERROR" />
-        <AsyncLogger name="org.xnio" level="ERROR" />
-        <AsyncLogger name="io.undertow" level="ERROR" />
-        <AsyncLogger name="io.netty" level="ERROR" />
-        <AsyncLogger name="com.zaxxer.hikari" level="ERROR" />
+        <AsyncLogger name="org.apache.commons.httpclient.util.IdleConnectionHandler" level="WARN" />
+        <AsyncLogger name="org.apache.http.client.protocol.RequestAddCookies" level="WARN" />
+        <AsyncLogger name="org.apache.http.client.protocol.RequestAuthCache" level="WARN" />
+        <AsyncLogger name="org.apache.http.impl" level="WARN" />
+        <AsyncLogger name="org.apache.http.headers" level="WARN" />
+        <AsyncLogger name="org.apache.http.wire" level="WARN" />
+        <AsyncLogger name="org.hibernate" level="WARN" />
+        <AsyncLogger name="io.lettuce" level="WARN" />
+        <AsyncLogger name="org.xnio" level="WARN" />
+        <AsyncLogger name="io.undertow" level="WARN" />
+        <AsyncLogger name="io.netty" level="WARN" />
+        <AsyncLogger name="com.zaxxer.hikari" level="WARN" />
 
         <asyncRoot level="all">
             <!-- 各应用自行调整，日志输出至文件，自动按时间、按文件大小进行归档 ,生产环境调默认为INFO，如有特殊需求，在disconf动态调级 -->
