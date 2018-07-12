@@ -25,26 +25,26 @@
 
         <!-- 以下是建议的日志压缩包目录的格式名称 -->
         <!-- all File Config -->
-        <RollingRandomAccessFile name="all"
+       <!-- <RollingRandomAccessFile name="all"
                                  filePattern="${logBaseFolder}/%d{yyyy-MM-dd}/${logFileNamePrefix}-all-%d{yyyyMMdd-HH}.%i.log.gz"
                                  fileName="${logBaseFolder}/${logFileNamePrefix}-all.log"
                                  immediateFlush="false">
-            <!-- 日志输出格式 -->
+            &lt;!&ndash; 日志输出格式 &ndash;&gt;
             <PatternLayout charset="${log_charset}" pattern="${log_pattern}" />
-            <!-- 以下是日志压缩包目录的建议格式名称 建议1天归档依次，压缩文件上线建议为200,这里预估每个磁盘存储空间200G左右，每个压缩包最大值200MB -->
+            &lt;!&ndash; 以下是日志压缩包目录的建议格式名称 建议1天归档依次，压缩文件上线建议为200,这里预估每个磁盘存储空间200G左右，每个压缩包最大值200MB &ndash;&gt;
             <Policies>
                 <TimeBasedTriggeringPolicy modulate="true" interval="1" />
                 <SizeBaseDTriggeringPolicy size="${every_file_size}" />
             </Policies>
             <DefaultRolloverStrategy max="1000" />
             <Filters>
-                <!-- 显示所有信息 -->
+                &lt;!&ndash; 显示所有信息 &ndash;&gt;
                 <ThresholdFilter onMismatch="DENY" onMatch="ACCEPT" level="TRACE" />
             </Filters>
-        </RollingRandomAccessFile>
+        </RollingRandomAccessFile>-->
 
         <!-- error File Config -->
-        <RollingRandomAccessFile name="errorLog"
+        <!--<RollingRandomAccessFile name="errorLog"
                                  filePattern="${logBaseFolder}/%d{yyyy-MM-dd}/${logFileNamePrefix}-error-%d{yyyyMMdd-HH}.%i.log.gz"
                                  fileName="${logBaseFolder}/${logFileNamePrefix}-error.log"
                                  immediateFlush="false">
@@ -54,60 +54,42 @@
                 <SizeBaseDTriggeringPolicy size="${every_file_size}" />
             </Policies>
             <Filters>
-                <!-- 只显示error信息 -->
+                &lt;!&ndash; 只显示error信息 &ndash;&gt;
                 <ThresholdFilter onMismatch="DENY" onMatch="ACCEPT" level="ERROR" />
             </Filters>
-        </RollingRandomAccessFile>
+        </RollingRandomAccessFile>-->
     </appenders>
 
     <loggers>
         <!-- 各应用按实际情况自行定义相关类的输出级别 -->
-        <AsyncLogger name="com.crn.member" level="DEBUG" />
-
-        <AsyncLogger name="com.apache" level="WARN" />
-        <AsyncLogger name="com.ibm.sc" level="WARN" />
-        <AsyncLogger name="org.apache.ibatis.jdbc" level="WARN" />
-
-        <AsyncLogger name="org.apache.zookeeper.ClientCnxn" level="WARN" />
-        <AsyncLogger name="org.apache.zookeeper.ZooKeeper" level="WARN" />
-        <AsyncLogger name="org.apache.commons.httpclient.util.IdleConnectionHandler" level="WARN" />
-
-        <AsyncLogger name="org.apache.http.client.protocol.RequestAddCookies" level="WARN" />
-
-        <AsyncLogger name="org.apache.http.client.protocol.RequestAuthCache" level="WARN" />
-        <AsyncLogger name="org.apache.http.impl.conn.PoolingHttpClientConnectionManager" level="WARN" />
-        <AsyncLogger name="org.apache.http.impl.execchain.MainClientExec" level="WARN" />
-        <AsyncLogger name="org.apache.http.headers" level="WARN" />
-        <AsyncLogger name="org.apache.http.wire" level="WARN" />
-
-        <AsyncLogger name="org.apache.activemq.transport.AbstractInactivityMonitor" level="WARN" />
-
-        <AsyncLogger name="com.alibaba.dubbo.remoting.transport.DecodeHandler" level="WARN" />
-        <AsyncLogger name="com.alibaba.dubbo.monitor.dubbo.DubboMonitor" level="OFF" />
-        <AsyncLogger name="com.alibaba.dubbo.remoting.exchange.support.header.HeartbeatHandler" level="WARN" />
-        <AsyncLogger name="com.alibaba.dubbo.remoting.exchange.support.header.HeartBeatTask" level="WARN" />
-        <AsyncLogger name="com.alibaba.dubbo.registry.zookeeper.ZookeeperRegistry" level="WARN" />
-        <AsyncLogger name="com.alibaba.dubbo.config.AbstractConfig" level="WARN" />
-
-        <AsyncLogger name="com.baidu.disconf.client.config.inner.DisInnerConfigHelper" level="WARN" />
-        <AsyncLogger name="com.baidu.disconf.client.config.ConfigMgr" level="WARN" />
-        <AsyncLogger name="com.baidu.disconf.core.common.utils.ClassLoaderUtil" level="WARN" />
-        <AsyncLogger name="com.baidu.disconf.core.common.utils.http.HttpClientUtil" level="WARN" />
-
+        <AsyncLogger name="com.open" level="DEBUG" />
+        <AsyncLogger name="org.apache.ibatis.jdbc" level="INFO" />
+        <AsyncLogger name="org.mybatis" level="INFO"/>
         <AsyncLogger name="org.springframework" level="WARN" />
-        <AsyncLogger name="RocketmqRemoting" level="WARN" />
-        <AsyncLogger name="RocketmqClient" level="WARN" />
+        <AsyncLogger name="com.apache" level="WARN" />
         <AsyncLogger name="org.apache.kafka" level="WARN" />
+        <AsyncLogger name="org.apache.commons.httpclient.util.IdleConnectionHandler" level="ERROR" />
+        <AsyncLogger name="org.apache.http.client.protocol.RequestAddCookies" level="ERROR" />
+        <AsyncLogger name="org.apache.http.client.protocol.RequestAuthCache" level="ERROR" />
+        <AsyncLogger name="org.apache.http.impl" level="ERROR" />
+        <AsyncLogger name="org.apache.http.headers" level="ERROR" />
+        <AsyncLogger name="org.apache.http.wire" level="ERROR" />
+        <AsyncLogger name="org.hibernate" level="ERROR" />
+        <AsyncLogger name="io.lettuce" level="ERROR" />
+        <AsyncLogger name="org.xnio" level="ERROR" />
+        <AsyncLogger name="io.undertow" level="ERROR" />
+        <AsyncLogger name="io.netty" level="ERROR" />
+        <AsyncLogger name="com.zaxxer.hikari" level="ERROR" />
 
-        <asyncRoot level="DEBUG">
+        <asyncRoot level="all">
             <!-- 各应用自行调整，日志输出至文件，自动按时间、按文件大小进行归档 ,生产环境调默认为INFO，如有特殊需求，在disconf动态调级 -->
-            <appender-ref level="DEBUG" ref="all" />
+            <appender-ref  ref="console" />
 
             <!-- 日志输出至Console，仅在IDE开发时打开方便开发人员，部署到服务器之后必须置为OFF，level设置为OFF表示禁用Console控制台日志输出 -->
-            <appender-ref level="TRACE" ref="console" />
+
 
             <!-- 异常日志，不用改动 -->
-            <appender-ref level="ERROR" ref="console" />
+
         </asyncRoot>
     </loggers>
 </configuration>
