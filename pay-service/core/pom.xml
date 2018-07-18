@@ -17,24 +17,6 @@
     </parent>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-undertow</artifactId>
-        </dependency>
         <!--wx_pay-->
         <dependency>
             <groupId>com.github.binarywang</groupId>
@@ -49,7 +31,11 @@
             <scope>system</scope>
             <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/alipay-sdk-java20170818173712.jar</systemPath>
         </dependency>
-
+        <dependency>
+            <groupId>com.open</groupId>
+            <artifactId>open-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <dependency>
             <groupId>com.open</groupId>
             <artifactId>open-common</artifactId>

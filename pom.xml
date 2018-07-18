@@ -12,6 +12,7 @@
 
   <modules>
     <module>open-api</module>
+	<module>open-core</module>
     <module>open-common</module>
 	<module>gateway-service</module>
 	<module>user-service</module>

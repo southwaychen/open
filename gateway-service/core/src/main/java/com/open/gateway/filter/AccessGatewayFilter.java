@@ -19,7 +19,7 @@ import reactor.core.publisher.Mono;
 /**
  * 请求url权限校验
  */
-@Configuration
+//@Configuration
 public class AccessGatewayFilter implements GlobalFilter {
 
     private static Logger logger = LoggerFactory.getLogger(AccessGatewayFilter.class);
