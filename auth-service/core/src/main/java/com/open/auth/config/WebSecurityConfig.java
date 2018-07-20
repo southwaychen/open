@@ -1,5 +1,8 @@
 package com.open.auth.config;
 
+import com.open.auth.security.CustomAccessDeniedHandler;
+import com.open.auth.security.CustomAuthenticationFailureHandler;
+import com.open.auth.security.CustomAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +28,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("userDetailService")
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+
+    @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+
+    @Autowired
+    private CustomAccessDeniedHandler customAccessDeniedHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
@@ -37,8 +49,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated().and()
                 // Set login page
                 .formLogin().loginPage(LOGIN).permitAll().defaultSuccessUrl(PROFILE)
+                .failureHandler(customAuthenticationFailureHandler)
+                .successHandler(customAuthenticationSuccessHandler)
                 // Set logout handling
-                .and().logout().logoutSuccessUrl(LOGOUT_SUCCESS);
+                .and().logout().logoutSuccessUrl(LOGOUT_SUCCESS)
+                .and().exceptionHandling().accessDeniedHandler(customAccessDeniedHandler);
         // @formatter:on
     }
 

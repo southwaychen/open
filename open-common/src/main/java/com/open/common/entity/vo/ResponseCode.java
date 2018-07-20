@@ -23,12 +23,13 @@ public enum ResponseCode {
 
     // 失败(01开始标示参数校验相关错误码)
     RET_PARAM_NOT_FOUND("00000101", "参数为空或参数错误!"),
-    RET_PARAM_INVALID("00000102", "无效的参数"),
+    RET_PARAM_USERNAME_PWD_INVALID("00000102", "用户名或者密码错误!"),
     RET_PARAM_TOO_LARGE_LIST("00000103", "列表超长"),
     RET_PARAM_TYPE_INVALID("00000104", "参数类型错误"),
     RET_CURRENT_PAGE_INVALID("00000105", "当前页码非法"),
     RET_VIEW_NUMBER_INVALID("00000106", "分页显示数目非法"),
     RET_VIEW_LIMIT_INVALID("00000107", "数据排列显示数目非法"),
+    RET_PARAM_AUTHRIZATION_INVALID("00000108", "权限不足!"),
 
     //  失败(02开始标示DB操作相关错误码)
 
