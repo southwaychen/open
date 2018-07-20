@@ -22,14 +22,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(ResourceServerSecurityConfigurer resourceServerSecurityConfigurer) throws Exception {
         resourceServerSecurityConfigurer
                 .tokenStore(tokenStore())
-                .resourceId("WEBS");
+                .resourceId("webs");
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/auth/**").permitAll()
-                .anyRequest().authenticated();
+        http.requestMatchers().antMatchers("/user").and().authorizeRequests().anyRequest().authenticated();
     }
 
     @Bean
