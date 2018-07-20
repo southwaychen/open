@@ -22,7 +22,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(ResourceServerSecurityConfigurer resourceServerSecurityConfigurer) throws Exception {
         resourceServerSecurityConfigurer
                 .tokenStore(tokenStore())
-                .resourceId("webs");
+                .resourceId(null);
     }
 
     @Override
