@@ -11,7 +11,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
 
-public abstract class BaseService<M extends Mapper<T>, T> {
+public abstract class BaseService<T> {
 
     @Autowired
     protected Mapper<T> mapper;

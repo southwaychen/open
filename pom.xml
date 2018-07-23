@@ -18,6 +18,7 @@
 	<module>user-service</module>
     <module>auth-service</module>
 	<module>pay-service</module>
+	<module>open-modules</module>
   </modules>
 
   <parent>

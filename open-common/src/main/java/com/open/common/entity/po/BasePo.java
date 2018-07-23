@@ -6,22 +6,22 @@ import java.util.Date;
 
 public class BasePo implements Serializable {
 
-    private Date createTime;
-    private Date updateTime ;
+    private Date createdTime;
+    private Date updatedTime ;
 
     public Date getCreatedTime() {
-        return createTime;
+        return createdTime;
     }
 
     public void setCreatedTime(Date createdTime) {
-        this.createTime = createdTime;
+        this.createdTime = createdTime;
     }
 
     public Date getUpdatedTime() {
-        return updateTime;
+        return updatedTime;
     }
 
     public void setUpdatedTime(Date updatedTime) {
-        this.updateTime = updatedTime;
+        this.updatedTime = updatedTime;
     }
 }
