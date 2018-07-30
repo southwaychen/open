@@ -6,9 +6,7 @@ import com.open.common.entity.vo.ResponseWrapper;
 import com.open.common.exception.ServiceException;
 import com.open.user.api.UserUrl;
 import com.open.user.api.entity.vo.UserVo;
-import com.open.user.dal.entity.Role;
-import com.open.user.dal.entity.UserInfo;
-import com.open.user.service.biz.RoleService;
+import com.open.user.entity.po.UserInfo;
 import com.open.user.service.biz.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -28,8 +26,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private RoleService roleService;
+    /*@Autowired
+    private RoleService roleService;*/
 
     @RequestMapping(value = UserUrl.FIND_USER_BY_USERNAME)
     public ResponseWrapper findUserByUsername(@PathVariable("username") String username){
@@ -48,7 +46,7 @@ public class UserController {
         responseWrapper.setData(userVO);
         return responseWrapper;
     }
-    @RequestMapping(value = UserUrl.QUERY_USER_ROLES_BY_USERID)
+    /*@RequestMapping(value = UserUrl.QUERY_USER_ROLES_BY_USERID)
     public ResponseWrapper queryUserRolesByUserId(@PathVariable("userId") String userId){
         if(StringUtils.isEmpty(userId)){
             throw new ServiceException(ResponseCode.RET_PARAM_NOT_FOUND.getCode(),ResponseCode.RET_PARAM_NOT_FOUND.getMsg());
@@ -57,5 +55,5 @@ public class UserController {
         ResponseWrapper responseWrapper = new ResponseWrapper();
         responseWrapper.setData(roles);
         return responseWrapper;
-    }
+    }*/
 }

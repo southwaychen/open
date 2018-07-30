@@ -3,8 +3,8 @@ package com.open.user.service.biz;
 import com.open.api.entity.vo.ResponseCode;
 import com.open.common.exception.ServiceException;
 import com.open.core.util.UuidUtils;
-import com.open.user.dal.entity.UserInfo;
-import com.open.user.dal.mapper.UserInfoMapper;
+import com.open.user.entity.po.UserInfo;
+import com.open.user.mapper.UserInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

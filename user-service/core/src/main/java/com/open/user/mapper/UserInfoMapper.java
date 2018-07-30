@@ -1,6 +1,6 @@
-package com.open.user.dal.mapper;
+package com.open.user.mapper;
 
-import com.open.user.dal.entity.UserInfo;
+import com.open.user.entity.po.UserInfo;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 

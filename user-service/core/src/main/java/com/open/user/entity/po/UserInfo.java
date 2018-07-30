@@ -1,4 +1,4 @@
-package com.open.user.dal.entity;
+package com.open.user.entity.po;
 
 
 

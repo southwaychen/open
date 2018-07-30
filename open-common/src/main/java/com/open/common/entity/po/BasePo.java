@@ -8,6 +8,7 @@ public class BasePo implements Serializable {
 
     private Date createdTime;
     private Date updatedTime ;
+    private Integer status;
 
     public Date getCreatedTime() {
         return createdTime;
@@ -23,5 +24,13 @@ public class BasePo implements Serializable {
 
     public void setUpdatedTime(Date updatedTime) {
         this.updatedTime = updatedTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }
